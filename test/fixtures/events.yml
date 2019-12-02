@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2019-12-02
+  start: 2019-12-02 17:41:37
+  end: 2019-12-02 17:41:37
+  message: MyString
+  name: MyString
+  price: 1
+  description: MyText
+  user: one
+  slots: 1
+  completed: false
+  location: one
+  private: false
+  pre-payment: false
+  selective: false
+  status: MyString
+  destroyed: false
+
+two:
+  date: 2019-12-02
+  start: 2019-12-02 17:41:37
+  end: 2019-12-02 17:41:37
+  message: MyString
+  name: MyString
+  price: 1
+  description: MyText
+  user: two
+  slots: 1
+  completed: false
+  location: two
+  private: false
+  pre-payment: false
+  selective: false
+  status: MyString
+  destroyed: false
