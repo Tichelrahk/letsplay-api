@@ -5,6 +5,7 @@ class Api::V1::LocationsController < Api::V1::BaseController
     if @location.save
     else
       render_error
+    end
   end
 
   private

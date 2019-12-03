@@ -11,6 +11,7 @@ class Api::V1::ConfirmationsController < Api::V1::BaseController
       render :show
     else
       render_error
+    end
   end
 
   def update
