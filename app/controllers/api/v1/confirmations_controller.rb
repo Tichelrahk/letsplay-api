@@ -23,7 +23,7 @@ class Api::V1::ConfirmationsController < Api::V1::BaseController
   private
 
   def confirmation_params
-    params.require(:confirmation).permit (:status, :not_attended)
+    params.require(:confirmation).permit(:status, :not_attended)
   end
 
   def render_error

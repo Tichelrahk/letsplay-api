@@ -10,7 +10,7 @@ class Api::V1::LocationsController < Api::V1::BaseController
   private
 
   def location_params
-    params.require(:location).permit (:address, :longitude, :latitude)
+    params.require(:location).permit(:address, :longitude, :latitude)
   end
 
   def render_error
