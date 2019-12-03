@@ -25,8 +25,8 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def show
     @user = User.find(params[:id])
-    @events = @user.events if @user.events
-    @confirmations = @user.confirmations if @user.confirmations
+    @events = @user.events
+    @confirmations = @user.confirmations || []
     # debugger
   end
 

@@ -12,17 +12,22 @@ json.user do
       json.user confirmation.event.user
     end
   end
-end
 
-if @events
-  json.event @events do |event|
-    json.id event.id
-    json.description event.description
-    json.name event.name
-    json.confirmations @event.confirmations do |confirmation|
-      json.confirmation confirmation
-      json.user confirmation.user
-      json.event confirmation.event
-    end
+  json.events @events do |event|
+    json.extract! event, :id, :name, :description, :image
   end
 end
+
+# if @events
+#   json.event @events do |event|
+#     json.id event.id
+#     json.description event.description
+#     json.name event.name
+#     @events.confirmations
+#     json.confirmations @events.confirmations do |confirmation|
+#       json.confirmation confirmation
+#       json.user confirmation.user
+#       json.event confirmation.event
+#     end
+#   end
+# end
