@@ -1,21 +1,24 @@
 json.user do
   json.id @user.id
-  json.description @user.description
+  json.description @user.bio
   json.name @user.name
   json.location @user.location
   json.profile_picture @user.profile_picture
-  json.confirmations @confirmations do |confirmation|
-    json.confirmation confirmation
-    json.event confirmation.event
-    json.user confirmation.event.user
+  if @confirmations
+    json.confirmations @confirmations do |confirmation|
+      json.confirmation confirmation
+      json.status confirmation.status
+      json.event confirmation.event
+      json.user confirmation.event.user
+    end
   end
 end
 
-if @event
-  json.event do
-    json.id @event.id
-    json.description @event.description
-    json.name @event.name
+if @events
+  json.event @events do |event|
+    json.id event.id
+    json.description event.description
+    json.name event.name
     json.confirmations @event.confirmations do |confirmation|
       json.confirmation confirmation
       json.user confirmation.user
