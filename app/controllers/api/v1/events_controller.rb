@@ -3,6 +3,7 @@ class Api::V1::EventsController < Api::V1::BaseController
 
   def index
     @events = Event.all
+    # render json: @events
   end
 
   def show
@@ -14,6 +15,7 @@ class Api::V1::EventsController < Api::V1::BaseController
       render :show
     else
       render_error
+    end
   end
 
   def update
@@ -21,12 +23,13 @@ class Api::V1::EventsController < Api::V1::BaseController
       render :show
     else
       render_error
+    end
   end
 
   private
 
-  def events_params
-    params.require(:event).permit (:name, :date, :start, :end, :descrption)
+  def event_params
+    params.require(:event).permit(:name, :date, :start, :end, :descrption)
   end
 
   def render_error
