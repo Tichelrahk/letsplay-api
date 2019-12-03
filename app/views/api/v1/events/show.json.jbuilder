@@ -7,6 +7,7 @@ if @event
     json.name @event.name
     json.start @event.start
     json.end @event.end
+    json.image @event.image
     json.confirmations @event.confirmations do |confirmation|
       json.confirmation confirmation
       json.user confirmation.user
