@@ -12,7 +12,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     }
 #
     @wechat_response ||= RestClient.get(URL, params: wechat_params)
+    p @wechat_response
     @wechat_user ||= JSON.parse(@wechat_response.body)
+    p @wechat_user
+    @wechat_user
 
   end
 
