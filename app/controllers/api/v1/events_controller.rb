@@ -2,7 +2,12 @@ class Api::V1::EventsController < Api::V1::BaseController
   before_action :set_event, only:[:show]
 
   def index
-    @events = Event.all
+    if params[:query].present?
+      sql_query = "name ILIKE :query"
+      @events = Event.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @events = Event.all
+    end
     # render json: @events
   end
 
@@ -29,7 +34,7 @@ class Api::V1::EventsController < Api::V1::BaseController
   private
 
   def event_params
-    params.require(:event).permit(:name, :date, :start, :end, :descrption)
+    params.require(:event).permit(:name, :start, :end, :descrption)
   end
 
   def render_error

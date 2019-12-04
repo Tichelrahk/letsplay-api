@@ -8,6 +8,7 @@ if @event
     json.start @event.start
     json.end @event.end
     json.image @event.image
+    json.organizer @event.user
     json.confirmations @event.confirmations do |confirmation|
       json.confirmation confirmation
       json.user confirmation.user
