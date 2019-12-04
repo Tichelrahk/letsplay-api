@@ -1,4 +1,5 @@
 class Api::V1::ConfirmationsController < Api::V1::BaseController
+  skip_before_action :verify_authenticity_token
 
   def create
     @event = Event.find(params[:event_id])
@@ -8,7 +9,10 @@ class Api::V1::ConfirmationsController < Api::V1::BaseController
     @confirmation.event = @event
     @confirmation.user = @user
     if @confirmation.save
-      render :show
+      # render :show
+      render json: {
+        msg: "Joined"
+      }
     else
       render_error
     end
