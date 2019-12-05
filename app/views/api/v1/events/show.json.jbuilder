@@ -5,8 +5,9 @@ if @event
     json.id @event.id
     json.description @event.description
     json.name @event.name
-    json.start @event.start
-    json.end @event.end
+    json.date @event.start.strftime("%A, %b %d")
+    json.start @event.start.strftime("%A, %b%l:%M%p")
+    json.end @event.end.strftime("%A, %b%l:%M%p")
     json.image @event.image
     json.organizer @event.user
     json.location @event.location
