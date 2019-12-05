@@ -10,11 +10,17 @@ json.user do
       json.status confirmation.status
       json.event confirmation.event
       json.user confirmation.event.user
+      json.date confirmation.event.start.strftime("%A, %b %d")
+      json.start confirmation.event.start.strftime("%-l:%M%p")
+      json.end confirmation.event.end.strftime("%-l:%M%p")
     end
   end
 
   json.events @events do |event|
     json.extract! event, :id, :name, :description, :image
+    json.date event.start.strftime("%A, %b %d")
+    json.start event.start.strftime("%-l:%M%p")
+    json.end event.end.strftime("%-l:%M%p")
   end
 end
 
