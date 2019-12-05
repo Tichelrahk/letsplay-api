@@ -1,5 +1,6 @@
 class Api::V1::EventsController < Api::V1::BaseController
-  before_action :set_event, only:[:show]
+  skip_before_action :verify_authenticity_token
+  before_action :set_event, only: [:show]
 
   def index
     if params[:query].present?
@@ -16,7 +17,12 @@ class Api::V1::EventsController < Api::V1::BaseController
 
   def create
     @event = Event.new(event_params)
-    if @event.save
+    @user = User.find(params[:user_id])
+    @location = Location.new(location_params)
+    @location.save!
+    @event.user = @user
+    @event.location = @location
+    if @event.save!
       render :show
     else
       render_error
@@ -34,7 +40,11 @@ class Api::V1::EventsController < Api::V1::BaseController
   private
 
   def event_params
-    params.require(:event).permit(:name, :start, :end, :descrption)
+    params.require(:event).permit(:name, :start, :end, :description, :image)
+  end
+
+  def location_params
+    params.require(:location).permit(:address, :latitude, :longitude)
   end
 
   def render_error
