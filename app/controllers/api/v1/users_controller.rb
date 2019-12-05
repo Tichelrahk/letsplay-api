@@ -35,6 +35,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user.update!(user_params)
   end
 
+
   private
 
   def user_params

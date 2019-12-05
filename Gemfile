@@ -32,6 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'acts_as_favoritor'
 
 gem 'rest-client'
 gem 'dotenv-rails'

@@ -37,6 +37,10 @@ class Api::V1::EventsController < Api::V1::BaseController
     end
   end
 
+  def acts_as_favoritable
+    @event.favoritors
+  end
+
   private
 
   def event_params
