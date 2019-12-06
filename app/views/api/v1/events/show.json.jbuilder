@@ -15,6 +15,10 @@ if @event
       json.confirmation confirmation
       json.user confirmation.user
     end
+    # json.favorites @user.favorites do |favorite|
+    #   json.favorite favorite
+    #   json.user favorite.user
+    # end
   end
 end
 
