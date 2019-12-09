@@ -25,6 +25,14 @@ class Api::V1::ConfirmationsController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    @user = User.find(params[:user_id])
+    @event = Event.find(params[:event_id])
+
+    @confirmation = Confirmation.find_by(user: @user, event: @event)
+    @confirmation.destroy
+  end
+
   private
 
   def confirmation_params

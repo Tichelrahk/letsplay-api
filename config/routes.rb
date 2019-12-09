@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post '/login', to: 'users#login'
       resources :events, only: [:index, :show, :create, :update] do
         resources :confirmations, only: [:create, :update]
+        delete '/confirmations', to: 'confirmations#destroy'
       end
       resources :users, only: [:show, :update]
       resources :locations, only: [:create]
