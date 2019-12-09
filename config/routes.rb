@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :events, only: [:index, :show, :create, :update] do
         resources :confirmations, only: [:create, :update]
         delete '/confirmations', to: 'confirmations#destroy'
+        put '/tag_list', to: 'events#update_tags'
       end
       resources :users, only: [:show, :update]
       resources :locations, only: [:create]

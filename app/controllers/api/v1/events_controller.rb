@@ -5,9 +5,9 @@ class Api::V1::EventsController < Api::V1::BaseController
   def index
     if params[:query].present?
       sql_query = "name ILIKE :query"
-      @events = Event.where(sql_query, query: "%#{params[:query]}%")
+      @events = Event.where(sql_query, query: "%#{params[:query]}%").order('updated_at DESC')
     else
-      @events = Event.all
+      @events = Event.order('updated_at DESC')
     end
     # render json: @events
   end
@@ -44,10 +44,20 @@ class Api::V1::EventsController < Api::V1::BaseController
     @event.favoritors
   end
 
+  def update_tags
+    @event = Event.find(params[:id])
+    @event.tag_list = tag_params
+    @event.save!
+  end
+
   private
 
   def event_params
-    params.require(:event).permit(:name, :start, :end, :description, :image)
+    params.require(:event).permit(:name, :start, :end, :description, :image, tag_list: [])
+  end
+
+  def tag_params
+    params.require(:event).permit(tag_list: [])
   end
 
   def location_params
@@ -55,7 +65,7 @@ class Api::V1::EventsController < Api::V1::BaseController
   end
 
   def render_error
-    render json:{ errors: @event.errors.full},
+    render json: { errors: @event.errors.full } ,
       status: :unprocessable_entity
   end
 

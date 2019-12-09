@@ -11,6 +11,7 @@ if @event
     json.image @event.image
     json.organizer @event.user
     json.location @event.location
+    json.tags @event.tag_list
     json.confirmations @event.confirmations do |confirmation|
       json.confirmation confirmation
       json.user confirmation.user
