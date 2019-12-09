@@ -26,5 +26,3 @@ if @event
     # end
   end
 end
-
-
