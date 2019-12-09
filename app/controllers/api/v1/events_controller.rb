@@ -13,6 +13,9 @@ class Api::V1::EventsController < Api::V1::BaseController
   end
 
   def show
+    if params[:user_id].present?
+      @user = User.find(params[:user_id])
+    end
   end
 
   def create
