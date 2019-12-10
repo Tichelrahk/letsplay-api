@@ -5,5 +5,6 @@ json.events do
     json.date event.start.strftime("%A, %b %d")
     json.start event.start.strftime("%-l:%M%p")
     json.end event.end.strftime("%-l:%M%p")
+    json.attendees event.confirmations.length + 1
   end
 end
