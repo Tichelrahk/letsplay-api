@@ -13,7 +13,7 @@ json.user do
       json.date confirmation.event.start.strftime("%A, %b %d")
       json.start confirmation.event.start.strftime("%-l:%M%p")
       json.end confirmation.event.end.strftime("%-l:%M%p")
-      json.location confirmation.event.address
+      json.location confirmation.event.location.address
       json.attendees confirmation.event.confirmations.length + 1
     end
   end
