@@ -13,11 +13,15 @@ json.user do
       json.date confirmation.event.start.strftime("%A, %b %d")
       json.start confirmation.event.start.strftime("%-l:%M%p")
       json.end confirmation.event.end.strftime("%-l:%M%p")
+      json.location confirmation.event.address
+      json.attendees confirmation.event.confirmations.length + 1
     end
   end
 
   json.events @events do |event|
-    json.extract! event, :id, :name, :description, :image
+    json.extract! event, :id, :name, :description, :image, :slots
+    json.attendees event.confirmations.length + 1
+    json.location event.location.address
     json.date event.start.strftime("%A, %b %d")
     json.start event.start.strftime("%-l:%M%p")
     json.end event.end.strftime("%-l:%M%p")
