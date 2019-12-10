@@ -4,8 +4,10 @@ class Api::V1::EventsController < Api::V1::BaseController
 
   def index
     if params[:query].present?
-      sql_query = "name ILIKE :query"
-      @events = Event.where(sql_query, query: "%#{params[:query]}%").order('updated_at DESC')
+      sql_query = "events.name ILIKE :query \
+      OR tags.name ILIKE :query \
+      OR locations.address ILIKE :query"
+      @events = Event.joins(:location).joins(:tags).where(sql_query, query: "%#{params[:query]}%").order('updated_at DESC').distinct
     else
       @events = Event.order('updated_at DESC')
     end
