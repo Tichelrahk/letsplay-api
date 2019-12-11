@@ -12,7 +12,7 @@ if @event
     json.organizer @event.user
     json.location @event.location
     json.tags @event.tag_list
-    json.full ((@event.confirmations.length + 1) >= @event.slots)
+    json.full @full
     json.confirmations @event.confirmations do |confirmation|
       json.confirmation confirmation
       json.user confirmation.user

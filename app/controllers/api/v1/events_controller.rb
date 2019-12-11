@@ -18,6 +18,7 @@ class Api::V1::EventsController < Api::V1::BaseController
     if params[:user_id].present?
       @user = User.find(params[:user_id])
     end
+    @full = ((@event.confirmations.length + 1) >= @event.slots) if @event.slots
   end
 
   def create
@@ -28,7 +29,9 @@ class Api::V1::EventsController < Api::V1::BaseController
     @event.user = @user
     @event.location = @location
     if @event.save!
-      render :show
+      render json: {
+        event: @event.id
+      }
     else
       render_error
     end
@@ -55,7 +58,7 @@ class Api::V1::EventsController < Api::V1::BaseController
   private
 
   def event_params
-    params.require(:event).permit(:name, :start, :end, :description, :image, tag_list: [])
+    params.require(:event).permit(:name, :start, :end, :description, :image, :slots, tag_list: [])
   end
 
   def tag_params
