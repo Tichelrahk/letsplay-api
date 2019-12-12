@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api , defaults: {format: :json} do
     namespace :v1 do
       post '/login', to: 'users#login'
-      resources :events, only: [:index, :show, :create, :update] do
+      resources :events, only: [:index, :show, :create, :update, :destroy] do
         resources :confirmations, only: [:create, :update]
         delete '/confirmations', to: 'confirmations#destroy'
         put '/tag_list', to: 'events#update_tags'

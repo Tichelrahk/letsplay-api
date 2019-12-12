@@ -55,6 +55,11 @@ class Api::V1::EventsController < Api::V1::BaseController
     @event.save!
   end
 
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+  end
+
   private
 
   def event_params
