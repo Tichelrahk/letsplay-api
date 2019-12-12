@@ -15,6 +15,8 @@ json.user do
       json.end confirmation.event.end.strftime("%-l:%M%p")
       json.location confirmation.event.location.address
       json.attendees confirmation.event.confirmations.length + 1
+      json.tag_list confirmation.event.tag_list
+      json.private confirmation.event.private
     end
   end
 
@@ -25,6 +27,7 @@ json.user do
     json.date event.start.strftime("%A, %b %d")
     json.start event.start.strftime("%-l:%M%p")
     json.end event.end.strftime("%-l:%M%p")
+    json.private event.private
   end
 end
 

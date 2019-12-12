@@ -7,9 +7,9 @@ class Api::V1::EventsController < Api::V1::BaseController
       sql_query = "events.name ILIKE :query \
       OR tags.name ILIKE :query \
       OR locations.address ILIKE :query"
-      @events = Event.joins(:location).joins(:tags).where(sql_query, query: "%#{params[:query]}%").order('updated_at DESC').distinct
+      @events = Event.joins(:location).joins(:tags).where(sql_query, query: "%#{params[:query]}%").order('updated_at DESC').distinct.select { |e| e.private != true }
     else
-      @events = Event.order('updated_at DESC')
+      @events = Event.order('updated_at DESC').select { |e| e.private != true }
     end
     # render json: @events
   end
@@ -58,7 +58,7 @@ class Api::V1::EventsController < Api::V1::BaseController
   private
 
   def event_params
-    params.require(:event).permit(:name, :start, :end, :description, :image, :slots, tag_list: [])
+    params.require(:event).permit(:name, :start, :end, :description, :image, :slots, :private, tag_list: [])
   end
 
   def tag_params
