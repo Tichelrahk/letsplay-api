@@ -27,6 +27,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user = User.find(params[:id])
     @events = @user.events
     @confirmations = @user.confirmations || []
+    @favorited = @user.all_favorited
     # debugger
   end
 

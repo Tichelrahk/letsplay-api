@@ -28,6 +28,20 @@ json.user do
     json.start event.start.strftime("%-l:%M%p")
     json.end event.end.strftime("%-l:%M%p")
     json.private event.private
+    json.tag_list event.tag_list
+  end
+
+  if @favorited
+    json.favorited @favorited do |event|
+    json.extract! event, :id, :name, :description, :image, :slots
+    json.attendees event.confirmations.length + 1
+    json.location event.location.address
+    json.date event.start.strftime("%A, %b %d")
+    json.start event.start.strftime("%-l:%M%p")
+    json.end event.end.strftime("%-l:%M%p")
+    json.private event.private
+    json.tag_list event.tag_list
+    end
   end
 end
 
