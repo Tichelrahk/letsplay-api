@@ -7,9 +7,9 @@ class Api::V1::EventsController < Api::V1::BaseController
       sql_query = "events.name ILIKE :query \
       OR tags.name ILIKE :query \
       OR locations.address ILIKE :query"
-      @events = Event.joins(:location).joins(:tags).where(sql_query, query: "%#{params[:query]}%").order('updated_at DESC').distinct.select { |e| e.private != true }
+      @events = Event.joins(:location).joins(:tags).where(sql_query, query: "%#{params[:query]}%").order('updated_at DESC').distinct.select { |e| e.private != true }.select { |e| Time.now < e.start }
     else
-      @events = Event.order('updated_at DESC').select { |e| e.private != true }
+      @events = Event.order('updated_at DESC').select { |e| e.private != true }.select { |e| Time.now < e.start }
     end
     # render json: @events
   end
